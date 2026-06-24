@@ -27,7 +27,7 @@ test.describe("home dashboard", () => {
     await page.goto("/");
 
     await expect(
-      page.getByRole("heading", { name: "sv-skeleton", level: 1 }),
+      page.getByRole("heading", { name: "agent-moodboard", level: 1 }),
     ).toBeVisible();
     await expect(page.getByText("API heartbeat")).toBeVisible();
     await expect(page.getByText("Database connection")).toBeVisible();

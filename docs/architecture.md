@@ -8,7 +8,7 @@ be updated regularly, and should always match information in the live project.
 ## Repository layout
 
 ```
-sv-skeleton/
+agent-moodboard/
 ├── apps/
 │   ├── api/                     FastAPI backend (Python 3.12, async SQLAlchemy)
 │   │   ├── app/

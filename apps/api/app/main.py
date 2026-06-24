@@ -5,7 +5,7 @@ from app.config import settings
 from app.routers import health, items, me
 
 app = FastAPI(
-    title="sv-skeleton API",
+    title="agent-moodboard API",
     version="0.1.0",
     docs_url="/docs" if settings.local_dev else None,
     redoc_url="/redoc" if settings.local_dev else None,

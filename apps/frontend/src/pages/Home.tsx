@@ -251,7 +251,7 @@ export function Home() {
     <div className={styles.container}>
       <header className={styles.header}>
         <div>
-          <h1>sv-skeleton</h1>
+          <h1>agent-moodboard</h1>
           <p className={styles.subtitle}>Service status &amp; developer dashboard</p>
         </div>
         <button onClick={logout}>Sign out</button>
