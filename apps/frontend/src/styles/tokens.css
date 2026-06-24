@@ -1,58 +1,71 @@
+/*
+ * Supervenient design tokens — v0.6 "ground · facets · spark".
+ * Source of truth: docs/design/supervenient-brand-and-design-system.md
+ *                  docs/design/supervenient-design-tokens.json
+ *
+ * Model: GROUND (purple substrate) · FACETS (the parts) · SPARK (the convergence point).
+ * Luminous effects (facet blends, kaleidoscope, spark) only read on a deep ground;
+ * on light surfaces use solid facet fills, ink variants and soft tints — no glow on white.
+ */
 :root {
-  /* ---- Colour: core ---- */
-  --color-canvas: #ffffff;
-  --color-depth: #0e2841;
-  --color-ink: #0e2841;
+  /* ---- Colour: ground (substrate) ---- */
+  --color-ink: #4f2270;        /* ground.core — default text/heading (calm violet, not black; ~11.6:1 on white) */
+  --color-depth: #241036;      /* ground.depth — dark canvas/hero; the ground facets & spark glow against */
+  --color-canvas: #ffffff;     /* neutral.0 — white raised surfaces (cards, inputs) */
 
-  /* ---- Colour: neutrals (navy-tinted) ---- */
-  --color-neutral-50: #f6f8fa;
-  --color-neutral-100: #eceff3;
-  --color-neutral-200: #dce2e9;
-  --color-neutral-400: #9aa5b3;
-  --color-neutral-600: #5b6675;
-  --color-neutral-900: #0e2841;
+  /* ---- Colour: neutrals (purple-tinted) ---- */
+  --color-neutral-50: #f4f1f8;   /* subtle surface / app background */
+  --color-neutral-100: #ece7f2;  /* cards / raised surface */
+  --color-neutral-200: #ded5ea;  /* borders, dividers */
+  --color-neutral-400: #9c90ae;  /* placeholder / disabled (non-essential text only) */
+  --color-neutral-600: #5e5470;  /* secondary text (~7:1 on white) */
+  --color-neutral-900: #241036;  /* deepest neutral = ground.depth */
 
-  /* ---- Colour: accent decorative (gradients / fills / glow only — never text on white) ---- */
-  --color-sky-dec: #93daf7;
-  --color-peach-dec: #f3ac89;
-  --color-mint-dec: #a1e9ab;
-  --color-lilac-dec: #eaa4e0;
+  /* ---- Colour: facets — decorative (fills / gradients / glow only — never text on white) ---- */
+  --color-gold-dec: #ffc000;     /* warm lead facet */
+  --color-green-dec: #8ed973;
+  --color-teal-dec: #2fb6d4;     /* cool facet */
+  --color-magenta-dec: #d45bb0;  /* optional 4th facet */
 
-  /* Accessible variants — text / icons / UI on light backgrounds */
-  --color-sky: #1668b0;
-  --color-peach: #b45a30;
-  --color-mint: #1e7a3e;
-  --color-lilac: #9a4d8e;
+  /* Facet ink — text / icons / UI on light backgrounds */
+  --color-gold: #8a5e00;
+  --color-green: #1e7a3e;
+  --color-teal: #0e7088;
+  --color-magenta: #9a2f80;
 
-  /* Accessible variants — on dark (depth) backgrounds */
-  --color-sky-on-dark: #93daf7;
-  --color-peach-on-dark: #f3ac89;
-  --color-mint-on-dark: #7fe0a0;
-  --color-lilac-on-dark: #eaa4e0;
+  /* Facet on-dark — elements on the depth ground */
+  --color-gold-on-dark: #ffc000;
+  --color-green-on-dark: #8ed973;
+  --color-teal-on-dark: #2fb6d4;
+  --color-magenta-on-dark: #d45bb0;
+
+  /* ---- Colour: spark — the whole / convergence point ---- */
+  /* Point scale only · dark ground only · one per view · never text, never semantic. Invisible on white by design. */
+  --color-spark: #ffff00;
 
   /* ---- Colour: semantic (always pair with icon + text, never colour alone) ---- */
   --color-danger: #b3261e;
   --color-danger-surface: #fbeae8;
   --color-danger-on-dark: #ff9a90;
-  --color-warning: #8a5a00;
-  --color-warning-surface: #fcf3e1;
-  --color-warning-on-dark: #f5c26b;
+  --color-warning: #8a5e00;
+  --color-warning-surface: #fdf1d6;
+  --color-warning-on-dark: #ffc000;
   --color-success: #1e7a3e;
-  --color-success-surface: #e7f6ec;
-  --color-success-on-dark: #7fe0a0;
-  --color-info: #1668b0;
-  --color-info-surface: #e6f3fc;
-  --color-info-on-dark: #93daf7;
+  --color-success-surface: #e9f8e6;
+  --color-success-on-dark: #8ed973;
+  --color-info: #0e7088;
+  --color-info-surface: #dbf1f6;
+  --color-info-on-dark: #2fb6d4;
 
   /* ---- Colour: focus ring (always visible, ≥3:1 against background) ---- */
-  --color-focus: #1668b0;
-  --color-focus-on-dark: #93daf7;
+  --color-focus: #7b4ba8;        /* light grounds */
+  --color-focus-on-dark: #2fb6d4;
 
-  /* ---- Colour: dark-mode surfaces ---- */
+  /* ---- Colour: dark-mode surfaces (map, don't invert) ---- */
   --color-dark-text: #ffffff;
-  --color-dark-text-secondary: #b9c4d2;
-  --color-dark-surface-1: #15314d;
-  --color-dark-surface-2: #1c3c5c;
+  --color-dark-text-secondary: #c9bbdd;
+  --color-dark-surface-1: #341852;
+  --color-dark-surface-2: #432063;
 
   /* ---- Typography ---- */
   --font-family: 'Lexend', system-ui, sans-serif;
@@ -100,19 +113,19 @@
   --radius-xl: 24px;
   --radius-pill: 999px;
 
-  /* ---- Elevation (diffuse, navy-tinted — never pure black) ---- */
-  --shadow-e1: 0 1px 3px rgba(14, 40, 65, 0.10), 0 1px 2px rgba(14, 40, 65, 0.06);
-  --shadow-e2: 0 4px 12px rgba(14, 40, 65, 0.08);
-  --shadow-e3: 0 12px 40px rgba(14, 40, 65, 0.12);
+  /* ---- Elevation (diffuse, aubergine-tinted — never pure black) ---- */
+  --shadow-e1: 0 1px 3px rgba(36, 16, 54, 0.12), 0 1px 2px rgba(36, 16, 54, 0.07);
+  --shadow-e2: 0 6px 20px rgba(36, 16, 54, 0.12);
+  --shadow-e3: 0 16px 48px rgba(36, 16, 54, 0.22);
 
-  /* ---- Motion ---- */
+  /* ---- Motion (calm, brief; decelerate; honour prefers-reduced-motion) ---- */
   --duration-fast: 120ms;
   --duration-base: 180ms;
   --duration-slow: 240ms;
   --ease-calm: cubic-bezier(0.2, 0, 0, 1);
 
-  /* ---- Layer opacities (AI indication) ---- */
+  /* ---- AI convergence layers (ambient → active → resolved) ---- */
   --layer-ambient: 0.18;
   --layer-active: 0.40;
-  --layer-expressive: 0.60;
+  --layer-resolved: 0.60;
 }

@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: var(--space-5);
-  background-color: rgba(14, 40, 65, 0.45);
+  background-color: rgba(36, 16, 54, 0.45);
   animation: fade var(--duration-base) var(--ease-calm);
 }
 

@@ -52,11 +52,12 @@
   }
 
   .primary {
-    background-color: var(--color-sky);
+    background-color: var(--color-teal-on-dark);
+    color: var(--color-depth);
   }
 
   .primary:hover:not(:disabled) {
-    background-color: var(--color-sky-on-dark);
-    color: var(--color-depth);
+    background-color: var(--color-teal);
+    color: var(--color-dark-text);
   }
 }

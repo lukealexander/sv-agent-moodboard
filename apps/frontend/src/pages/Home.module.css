@@ -373,7 +373,7 @@
 
   .badge.ok {
     color: var(--color-success-on-dark);
-    background-color: rgba(127, 224, 160, 0.12);
+    background-color: rgba(142, 217, 115, 0.12);
   }
   .badge.down {
     color: var(--color-danger-on-dark);

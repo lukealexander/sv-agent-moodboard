@@ -76,7 +76,7 @@ small {
    Links
    ============================================================ */
 a {
-  color: var(--color-sky);
+  color: var(--color-teal);
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   transition: color var(--duration-fast) var(--ease-calm);
@@ -154,7 +154,7 @@ select:focus,
 textarea:focus {
   border-color: var(--color-focus);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(22, 104, 176, 0.15);
+  box-shadow: 0 0 0 3px rgba(123, 75, 168, 0.15);
 }
 
 /* ============================================================
@@ -197,7 +197,7 @@ svg {
    Selection
    ============================================================ */
 ::selection {
-  background-color: var(--color-sky-dec);
+  background-color: var(--color-teal-dec);
   color: var(--color-depth);
 }
 
@@ -234,7 +234,7 @@ svg {
   }
 
   a {
-    color: var(--color-sky-on-dark);
+    color: var(--color-teal-on-dark);
   }
 
   a:hover {
@@ -259,7 +259,7 @@ svg {
   }
 
   ::selection {
-    background-color: var(--color-sky);
+    background-color: var(--color-teal);
     color: var(--color-dark-text);
   }
 }
