@@ -1,114 +1,114 @@
 {
   "$schema": "https://design-tokens.github.io/community-group/format/",
-  "$description": "Supervenient design tokens (v0.3). W3C Design Tokens Community Group format. Framework-agnostic. Companion to supervenient-brand-and-design-system.md.",
+  "$description": "Supervenient design tokens (v0.6). W3C Design Tokens Community Group format. Framework-agnostic (no Tailwind). Companion to supervenient-brand-and-design-system.md. Model: ground - facets - spark.",
 
   "color": {
     "$type": "color",
-    "canvas":  { "$value": "#FFFFFF", "$description": "Primary light background." },
-    "depth":   { "$value": "#0E2841", "$description": "Deep brand dark: dark surfaces, dark-mode canvas, strongest text." },
-    "ink":     { "$value": "#0E2841", "$description": "Default text colour. Calm navy, not pure black." },
-    "black":   { "$value": "#000000", "$description": "Reserved max-contrast only. Not the default text colour." },
+
+    "ground": {
+      "$description": "The substrate. Tier 1.",
+      "core":  { "$value": "#4F2270", "$description": "Brand purple: primary text and mid surfaces (~11.6:1 on white)." },
+      "depth": { "$value": "#241036", "$description": "Deep aubergine: dark canvas/hero — the ground the facets and spark glow against." }
+    },
+    "ink": { "$value": "#4F2270", "$description": "Default text colour (= ground.core). Calm violet, not pure black." },
 
     "neutral": {
-      "$description": "Navy-tinted greys. Minimum scale to build calmly.",
-      "0":   { "$value": "#FFFFFF" },
-      "50":  { "$value": "#F6F8FA", "$description": "App background / subtle surface." },
-      "100": { "$value": "#ECEFF3", "$description": "Cards / raised surface." },
-      "200": { "$value": "#DCE2E9", "$description": "Borders, dividers." },
-      "400": { "$value": "#9AA5B3", "$description": "Placeholder / disabled. Non-essential text only." },
-      "600": { "$value": "#5B6675", "$description": "Secondary text. Targets AA on white." },
-      "900": { "$value": "#0E2841", "$description": "Primary text. AAA on white." }
+      "$description": "Purple-tinted greys.",
+      "0":      { "$value": "#FFFFFF" },
+      "canvas": { "$value": "#FBFAFD", "$description": "App background (faint violet white)." },
+      "50":     { "$value": "#F4F1F8", "$description": "Subtle surface." },
+      "100":    { "$value": "#ECE7F2", "$description": "Cards / raised surface." },
+      "200":    { "$value": "#DED5EA", "$description": "Borders, dividers." },
+      "400":    { "$value": "#9C90AE", "$description": "Placeholder / disabled. Non-essential text only." },
+      "600":    { "$value": "#5E5470", "$description": "Secondary text (~7:1 on white)." }
     },
 
-    "accent": {
-      "$description": "Decorative values are gradients/fills/glow only and must NOT carry text on white. Use 'onLight' for text/icons/UI; 'onDark' on the depth background.",
-      "sky": {
-        "$description": "Lead accent. Same hue family as depth (blue-anchored).",
-        "decorative": { "$value": "#93DAF7" },
-        "onLight":    { "$value": "#1668B0" },
-        "onDark":     { "$value": "#93DAF7" }
+    "facet": {
+      "$description": "Tier 2 — the parts. Decorative values are fills/gradients only and must NOT carry text on white. Use 'ink' for text/icons/UI; 'onDark' on the depth ground. Blend in gradients, do not tile flat blocks.",
+      "gold": {
+        "$description": "Warm lead facet. The only warm facet — reserve for human, encouraging moments.",
+        "decorative": { "$value": "#FFC000" },
+        "ink":        { "$value": "#8A5E00" },
+        "onDark":     { "$value": "#FFC000" }
       },
-      "peach": {
-        "$description": "The only warm accent. Reserve for human, encouraging moments.",
-        "decorative": { "$value": "#F3AC89" },
-        "onLight":    { "$value": "#B45A30" },
-        "onDark":     { "$value": "#F3AC89" }
+      "green": {
+        "decorative": { "$value": "#8ED973" },
+        "ink":        { "$value": "#1E7A3E" },
+        "onDark":     { "$value": "#8ED973" }
       },
-      "mint": {
-        "decorative": { "$value": "#A1E9AB" },
-        "onLight":    { "$value": "#1E7A3E" },
-        "onDark":     { "$value": "#7FE0A0" }
+      "teal": {
+        "decorative": { "$value": "#2FB6D4" },
+        "ink":        { "$value": "#0E7088" },
+        "onDark":     { "$value": "#2FB6D4" }
       },
-      "lilac": {
-        "$description": "Deepened from the original #EDBDE7 (L84) to #EAA4E0 (L78, S62) for tonal parity with the other accents.",
-        "decorative": { "$value": "#EAA4E0" },
-        "onLight":    { "$value": "#9A4D8E" },
-        "onDark":     { "$value": "#EAA4E0" }
+      "magenta": {
+        "$description": "Optional fourth facet — richer kaleidoscopes and a fifth data series.",
+        "decorative": { "$value": "#D45BB0" },
+        "ink":        { "$value": "#9A2F80" },
+        "onDark":     { "$value": "#D45BB0" }
       }
+    },
+
+    "spark": {
+      "$description": "Tier 3 — the whole. The point where facets converge. The most powerful colour in the set BECAUSE it is rationed.",
+      "color":          { "$value": "#FFFF00", "$type": "color" },
+      "pointScaleOnly": { "$value": true, "$type": "boolean", "$description": "A node, marker or single highlight — never a fill or large area." },
+      "darkGroundOnly": { "$value": true, "$type": "boolean", "$description": "Reads on ground.core or darker; ~1.1:1 on white (invisible by design)." },
+      "onePerView":     { "$value": true, "$type": "boolean", "$description": "At most one spark per screen; a second cancels the first." },
+      "neverSemantic":  { "$value": true, "$type": "boolean", "$description": "Not a warning colour. Warning uses facet.gold.ink + icon." }
     },
 
     "semantic": {
-      "$description": "Functional colours, separate from brand accents so meaning is never ambiguous. Always pair with an icon and text, never colour alone.",
+      "$description": "Three of four share a hue with a facet, so meaning MUST be carried by icon + text — colour is reinforcement only. Danger (red) is the chromatically distinct one. The spark is never used semantically.",
       "danger":  { "strong": { "$value": "#B3261E" }, "surface": { "$value": "#FBEAE8" }, "onDark": { "$value": "#FF9A90" } },
-      "warning": { "strong": { "$value": "#8A5A00" }, "surface": { "$value": "#FCF3E1" }, "onDark": { "$value": "#F5C26B" } },
-      "success": { "strong": { "$value": "#1E7A3E" }, "surface": { "$value": "#E7F6EC" }, "onDark": { "$value": "#7FE0A0" } },
-      "info":    { "strong": { "$value": "#1668B0" }, "surface": { "$value": "#E6F3FC" }, "onDark": { "$value": "#93DAF7" } }
+      "warning": { "strong": { "$value": "#8A5E00" }, "surface": { "$value": "#FDF1D6" }, "onDark": { "$value": "#FFC000" } },
+      "success": { "strong": { "$value": "#1E7A3E" }, "surface": { "$value": "#E9F8E6" }, "onDark": { "$value": "#8ED973" } },
+      "info":    { "strong": { "$value": "#0E7088" }, "surface": { "$value": "#DBF1F6" }, "onDark": { "$value": "#2FB6D4" } }
     },
 
     "focus": {
-      "$description": "Focus ring. Always visible; >=3:1 against its background; never removed.",
-      "light": { "$value": "#1668B0" },
-      "dark":  { "$value": "#93DAF7" }
+      "$description": "Focus ring. Always visible; >=3:1 against background; never removed.",
+      "light": { "$value": "#7B4BA8" },
+      "dark":  { "$value": "#2FB6D4" }
     },
 
     "darkMode": {
-      "$description": "On a depth background, map rather than invert.",
+      "$description": "On a depth ground, map rather than invert.",
       "textPrimary":   { "$value": "#FFFFFF" },
-      "textSecondary": { "$value": "#B9C4D2" },
-      "surface1":      { "$value": "#15314D" },
-      "surface2":      { "$value": "#1C3C5C" }
+      "textSecondary": { "$value": "#C9BBDD" },
+      "surface1":      { "$value": "#341852" },
+      "surface2":      { "$value": "#432063" }
     },
 
     "dataviz": {
-      "$description": "Categorical order is colour-blind-safe; always pair with labels.",
+      "$description": "Categorical order is colour-blind-safe; always pair with labels. Spark highlights one point only.",
       "categorical": {
-        "1": { "$value": "#1668B0" },
-        "2": { "$value": "#B45A30" },
-        "3": { "$value": "#1E7A3E" },
-        "4": { "$value": "#9A4D8E" },
-        "5": { "$value": "#5B6675" }
+        "1": { "$value": "#FFC000" },
+        "2": { "$value": "#2FB6D4" },
+        "3": { "$value": "#8ED973" },
+        "4": { "$value": "#D45BB0" },
+        "5": { "$value": "#4F2270" }
       },
       "sequential": {
-        "1": { "$value": "#E6F3FC" },
-        "2": { "$value": "#93DAF7" },
-        "3": { "$value": "#1668B0" },
-        "4": { "$value": "#0E2841" }
-      }
+        "1": { "$value": "#DBF1F6" },
+        "2": { "$value": "#2FB6D4" },
+        "3": { "$value": "#0E7088" },
+        "4": { "$value": "#241036" }
+      },
+      "highlight": { "$value": "#FFFF00", "$description": "The spark — one point only, on a deep chart ground." }
     }
   },
 
-  "layer": {
-    "$description": "Signature layering/additive motif. Overlapping translucent fields whose intersection yields an emergent tone (supervenience). Also the way AI involvement is signalled.",
+  "motif": {
+    "$description": "Kaleidoscope / convergence. Facets resolving into a whole at a spark.",
     "groundRule": {
-      "$value": "Additive (screen) blending only renders on a dark/deep surface (>= color.depth). On light surfaces it blows out to white and the layers vanish.",
+      "$value": "Luminous effects (facet blends, kaleidoscope, spark) only render on a deep ground (>= color.ground.depth). On light surfaces use solid facet fills, ink variants and soft tints — no glow on white.",
       "$type": "string",
-      "$description": "Load-bearing constraint — read before using blendMode.default."
-    },
-    "requiresDarkGround": {
-      "$value": true,
-      "$type": "boolean",
-      "$description": "blendMode.default (screen) must sit on color.depth or darker. Otherwise switch to onLight technique."
+      "$description": "Load-bearing constraint."
     },
     "blendMode": {
-      "onDark":  { "$value": "screen",   "$type": "string", "$description": "Default. Overlaps move toward light. Use ONLY over a dark/deep ground." },
-      "onLight": { "$value": "normal",   "$type": "string", "$description": "On light surfaces do NOT screen. Use translucent soft accent tints (normal alpha blend), or place the luminous layer over a depth panel." },
-      "shadowOnly": { "$value": "multiply", "$type": "string", "$description": "Reserved for subtle neutral shadows on a light ground. Never multiply accents (produces mud)." }
-    },
-    "opacity": {
-      "$type": "number",
-      "ambient":    { "$value": 0.18, "$description": "AI available / underlying: a faint tint or edge." },
-      "active":     { "$value": 0.40, "$description": "AI working / contributing: layer brightens." },
-      "expressive": { "$value": 0.60, "$description": "Brand imagery and orb compositions (on a deep ground)." }
+      "onDark":  { "$value": "screen", "$type": "string", "$description": "Facet blends/kaleidoscope on a dark ground move toward light." },
+      "onLight": { "$value": "normal", "$type": "string", "$description": "On light surfaces use solid fills / soft tints, not screen." }
     }
   },
 
@@ -139,44 +139,32 @@
   "spacing": {
     "$type": "dimension",
     "$description": "Base unit 4px; primary rhythm 8px.",
-    "0": { "$value": "2px" },
-    "1": { "$value": "4px" },
-    "2": { "$value": "8px" },
-    "3": { "$value": "12px" },
-    "4": { "$value": "16px" },
-    "5": { "$value": "24px" },
-    "6": { "$value": "32px" },
-    "7": { "$value": "48px" },
-    "8": { "$value": "64px" },
-    "9": { "$value": "96px" }
+    "0": { "$value": "2px" }, "1": { "$value": "4px" }, "2": { "$value": "8px" },
+    "3": { "$value": "12px" }, "4": { "$value": "16px" }, "5": { "$value": "24px" },
+    "6": { "$value": "32px" }, "7": { "$value": "48px" }, "8": { "$value": "64px" }, "9": { "$value": "96px" }
   },
 
   "radius": {
     "$type": "dimension",
-    "sm":   { "$value": "6px" },
-    "md":   { "$value": "10px" },
-    "lg":   { "$value": "16px" },
-    "xl":   { "$value": "24px" },
-    "pill": { "$value": "999px" }
+    "sm": { "$value": "6px" }, "md": { "$value": "10px" }, "lg": { "$value": "16px" },
+    "xl": { "$value": "24px" }, "pill": { "$value": "999px" }
   },
 
   "elevation": {
     "$type": "shadow",
-    "$description": "Diffuse, navy-tinted shadows. Never pure black.",
+    "$description": "Diffuse, aubergine-tinted shadows. Never pure black.",
     "e1": { "$value": [
-      { "color": "rgba(14,40,65,0.10)", "offsetX": "0px", "offsetY": "1px", "blur": "3px", "spread": "0px" },
-      { "color": "rgba(14,40,65,0.06)", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" }
+      { "color": "rgba(36,16,54,0.12)", "offsetX": "0px", "offsetY": "1px", "blur": "3px", "spread": "0px" },
+      { "color": "rgba(36,16,54,0.07)", "offsetX": "0px", "offsetY": "1px", "blur": "2px", "spread": "0px" }
     ] },
-    "e2": { "$value": { "color": "rgba(14,40,65,0.08)", "offsetX": "0px", "offsetY": "4px", "blur": "12px", "spread": "0px" } },
-    "e3": { "$value": { "color": "rgba(14,40,65,0.12)", "offsetX": "0px", "offsetY": "12px", "blur": "40px", "spread": "0px" }, "$description": "Modals and orb glow." }
+    "e2": { "$value": { "color": "rgba(36,16,54,0.12)", "offsetX": "0px", "offsetY": "6px", "blur": "20px", "spread": "0px" } },
+    "e3": { "$value": { "color": "rgba(36,16,54,0.22)", "offsetX": "0px", "offsetY": "16px", "blur": "48px", "spread": "0px" }, "$description": "Modals and brand moments." }
   },
 
   "motion": {
     "duration": {
       "$type": "duration",
-      "fast": { "$value": "120ms" },
-      "base": { "$value": "180ms" },
-      "slow": { "$value": "240ms" }
+      "fast": { "$value": "120ms" }, "base": { "$value": "180ms" }, "slow": { "$value": "240ms" }
     },
     "easing": {
       "$type": "cubicBezier",
@@ -186,10 +174,10 @@
 
   "accessibility": {
     "$description": "Constraints, not styling. WCAG 2.2 AA.",
-    "minTextContrast":   { "$value": 4.5, "$type": "number" },
-    "minLargeContrast":  { "$value": 3.0, "$type": "number" },
-    "minTouchTargetPx":  { "$value": 44, "$type": "number" },
-    "minBodyFontPx":     { "$value": 16, "$type": "number" },
-    "neverColourAlone":  { "$value": true, "$type": "boolean", "$description": "Meaning must also be carried by icon and/or text." }
+    "minTextContrast":  { "$value": 4.5, "$type": "number" },
+    "minLargeContrast": { "$value": 3.0, "$type": "number" },
+    "minTouchTargetPx": { "$value": 44, "$type": "number" },
+    "minBodyFontPx":    { "$value": 16, "$type": "number" },
+    "neverColourAlone": { "$value": true, "$type": "boolean", "$description": "Meaning must also be carried by icon and/or text — especially given facet/semantic hue overlap." }
   }
 }
