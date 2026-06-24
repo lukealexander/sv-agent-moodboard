@@ -1,0 +1,36 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+# scripts/init-project.sh pre-fills service_name when you scaffold a project.
+
+# ── Required ─────────────────────────────────────────────────────────────────
+service_name = "my-app"                     # drives all resource names + subdomains
+github_repo  = "Supervenient-AI/svc-my-app" # GitHub repo Amplify builds the SPA from
+
+# github_access_token is SENSITIVE — do not put it here. Provide it via the
+# environment instead (or connect the Amplify GitHub App):
+#   export TF_VAR_github_access_token=ghp_xxx
+
+# ── Optional (defaults shown) ────────────────────────────────────────────────
+# environment = "development"           # selects /<environment>/platform/* in SSM
+# aws_region  = "eu-west-2"
+# domain_base = "labs.supervenient.ai"  # must match the platform's domain-base for `environment`
+#                                       #   staging  -> staging.supervenient.ai
+#                                       #   production -> app.supervenient.ai
+# github_branch = "main"
+
+# Auto-derived from the hostname (stable + unique per service) when left unset.
+# Only set this to override on a rare hash collision with another service.
+# api_listener_rule_priority = 100
+
+# Database (default: disabled). Set to true to provision a managed Postgres
+# database + role on the shared RDS instance; deploy.sh then runs the one-shot
+# bootstrap task each deploy to create it, store DATABASE_URL, and migrate.
+# create_database = false
+
+# Bring-your-own database instead: point the API at an existing DATABASE_URL
+# secret. Takes precedence over create_database (no db module is provisioned).
+# database_url_secret_arn = "arn:aws:secretsmanager:eu-west-2:123456789012:secret:my-app-db-AbCdEf"
+
+# container_image is set by scripts/deploy.sh (-var container_image=<ecr-url>:<tag>);
+# you normally do not set it here.
+
+# bedrock_model_id = <aws model id>

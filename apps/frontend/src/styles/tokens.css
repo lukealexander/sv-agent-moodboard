@@ -1,0 +1,118 @@
+:root {
+  /* ---- Colour: core ---- */
+  --color-canvas: #ffffff;
+  --color-depth: #0e2841;
+  --color-ink: #0e2841;
+
+  /* ---- Colour: neutrals (navy-tinted) ---- */
+  --color-neutral-50: #f6f8fa;
+  --color-neutral-100: #eceff3;
+  --color-neutral-200: #dce2e9;
+  --color-neutral-400: #9aa5b3;
+  --color-neutral-600: #5b6675;
+  --color-neutral-900: #0e2841;
+
+  /* ---- Colour: accent decorative (gradients / fills / glow only — never text on white) ---- */
+  --color-sky-dec: #93daf7;
+  --color-peach-dec: #f3ac89;
+  --color-mint-dec: #a1e9ab;
+  --color-lilac-dec: #eaa4e0;
+
+  /* Accessible variants — text / icons / UI on light backgrounds */
+  --color-sky: #1668b0;
+  --color-peach: #b45a30;
+  --color-mint: #1e7a3e;
+  --color-lilac: #9a4d8e;
+
+  /* Accessible variants — on dark (depth) backgrounds */
+  --color-sky-on-dark: #93daf7;
+  --color-peach-on-dark: #f3ac89;
+  --color-mint-on-dark: #7fe0a0;
+  --color-lilac-on-dark: #eaa4e0;
+
+  /* ---- Colour: semantic (always pair with icon + text, never colour alone) ---- */
+  --color-danger: #b3261e;
+  --color-danger-surface: #fbeae8;
+  --color-danger-on-dark: #ff9a90;
+  --color-warning: #8a5a00;
+  --color-warning-surface: #fcf3e1;
+  --color-warning-on-dark: #f5c26b;
+  --color-success: #1e7a3e;
+  --color-success-surface: #e7f6ec;
+  --color-success-on-dark: #7fe0a0;
+  --color-info: #1668b0;
+  --color-info-surface: #e6f3fc;
+  --color-info-on-dark: #93daf7;
+
+  /* ---- Colour: focus ring (always visible, ≥3:1 against background) ---- */
+  --color-focus: #1668b0;
+  --color-focus-on-dark: #93daf7;
+
+  /* ---- Colour: dark-mode surfaces ---- */
+  --color-dark-text: #ffffff;
+  --color-dark-text-secondary: #b9c4d2;
+  --color-dark-surface-1: #15314d;
+  --color-dark-surface-2: #1c3c5c;
+
+  /* ---- Typography ---- */
+  --font-family: 'Lexend', system-ui, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  --font-size-display: 3rem;       /* 48px */
+  --font-size-h1: 2.25rem;         /* 36px */
+  --font-size-h2: 1.75rem;         /* 28px */
+  --font-size-h3: 1.375rem;        /* 22px */
+  --font-size-body-lg: 1.125rem;   /* 18px */
+  --font-size-body: 1rem;          /* 16px */
+  --font-size-small: 0.875rem;     /* 14px */
+  --font-size-caption: 0.75rem;    /* 12px */
+
+  --line-height-display: 1.10;
+  --line-height-h1: 1.15;
+  --line-height-h2: 1.20;
+  --line-height-h3: 1.30;
+  --line-height-body: 1.55;
+  --line-height-small: 1.45;
+  --line-height-caption: 1.40;
+
+  --letter-spacing-display: -0.03em;
+  --letter-spacing-h1: -0.025em;
+  --letter-spacing-h2: -0.02em;
+  --letter-spacing-h3: -0.01em;
+
+  /* ---- Spacing (base 4px; primary rhythm 8px) ---- */
+  --space-0: 2px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+
+  /* ---- Border radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation (diffuse, navy-tinted — never pure black) ---- */
+  --shadow-e1: 0 1px 3px rgba(14, 40, 65, 0.10), 0 1px 2px rgba(14, 40, 65, 0.06);
+  --shadow-e2: 0 4px 12px rgba(14, 40, 65, 0.08);
+  --shadow-e3: 0 12px 40px rgba(14, 40, 65, 0.12);
+
+  /* ---- Motion ---- */
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+  --ease-calm: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- Layer opacities (AI indication) ---- */
+  --layer-ambient: 0.18;
+  --layer-active: 0.40;
+  --layer-expressive: 0.60;
+}

@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-5);
+  background-color: var(--color-neutral-50);
+}
+
+.card {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-e2);
+  padding: var(--space-7) var(--space-8);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.heading {
+  color: var(--color-ink);
+}
+
+.primary {
+  background-color: var(--color-depth);
+  color: var(--color-dark-text);
+  width: 100%;
+  justify-content: center;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--color-dark-surface-2);
+  box-shadow: var(--shadow-e1);
+}
+
+.primary:active:not(:disabled) {
+  background-color: var(--color-dark-surface-1);
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: var(--color-depth);
+  }
+
+  .card {
+    background-color: var(--color-dark-surface-1);
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .primary {
+    background-color: var(--color-sky);
+  }
+
+  .primary:hover:not(:disabled) {
+    background-color: var(--color-sky-on-dark);
+    color: var(--color-depth);
+  }
+}

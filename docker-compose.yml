@@ -1,0 +1,51 @@
+services:
+  api:
+    build:
+      context: ./apps/api
+      target: dev
+    volumes:
+      - ./apps/api:/app
+      # Anonymous volume keeps the image-built venv from being shadowed by the host mount
+      - /app/.venv
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    build:
+      context: ./apps/frontend
+      target: dev
+    volumes:
+      - ./apps/frontend/src:/app/src
+      - ./apps/frontend/index.html:/app/index.html
+    environment:
+      VITE_LOCAL_DEV: ${LOCAL_DEV:-false}      
+    ports:
+      - "5173:5173"
+    env_file:
+      - path: .env
+        required: false
+
+volumes:
+  postgres_data:

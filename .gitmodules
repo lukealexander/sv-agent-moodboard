@@ -1,0 +1,7 @@
+[submodule "terraform/modules"]
+	path = terraform/modules
+	url = https://github.com/Supervenient-AI/deployment.git
+	# TODO: pin to a released tag once the `deployment` repo cuts one
+	# (e.g. `cd terraform/modules && git checkout v1.0.0`, then commit the
+	# updated gitlink). Until then this tracks the default branch (main).
+	branch = main
