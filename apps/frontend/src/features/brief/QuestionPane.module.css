@@ -1,0 +1,210 @@
+.pane {
+  width: 100%;
+  max-width: 620px;
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-e2);
+  padding: clamp(var(--space-5), 4vw, var(--space-7));
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.prompt {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  letter-spacing: var(--letter-spacing-h2);
+  color: var(--color-ink);
+  text-wrap: balance;
+}
+
+.helper {
+  font-size: var(--font-size-body);
+  color: var(--color-neutral-600);
+  max-width: 52ch;
+}
+
+.body {
+  margin-top: var(--space-6);
+}
+
+.body[data-forked="true"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.option[data-forked="true"] {
+  padding: var(--space-4);
+  background-color: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+}
+
+.optionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.optionTag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal);
+}
+
+.optionRemove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  min-height: auto;
+  padding: 0;
+  color: var(--color-neutral-600);
+  background-color: transparent;
+  border-radius: var(--radius-pill);
+}
+
+.optionRemove:hover {
+  color: var(--color-ink);
+  background-color: var(--color-neutral-100);
+}
+
+.fork {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-4);
+  padding: var(--space-2) var(--space-3);
+  min-height: auto;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal);
+  background-color: transparent;
+  border-radius: var(--radius-md);
+}
+
+.fork:hover {
+  background-color: var(--color-info-surface);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-neutral-100);
+}
+
+.skip {
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-neutral-600);
+  background-color: transparent;
+}
+
+.skip:hover {
+  color: var(--color-ink);
+  background-color: var(--color-neutral-100);
+}
+
+.advance {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.generateNow {
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-teal);
+  background-color: transparent;
+}
+
+.generateNow:hover {
+  background-color: var(--color-info-surface);
+}
+
+.continue {
+  color: var(--color-dark-text);
+  background-color: var(--color-ink);
+}
+
+.continue:hover:not(:disabled) {
+  background-color: var(--color-depth);
+  box-shadow: var(--shadow-e1);
+}
+
+.continue:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* ---- Thinking ---- */
+.thinking {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  min-height: 196px;
+  margin-top: var(--space-6);
+}
+
+.thinkingPulse {
+  display: inline-flex;
+  gap: var(--space-2);
+}
+
+.thinkingPulse span {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  animation: pulse 1400ms var(--ease-calm) infinite;
+}
+
+.thinkingPulse span:nth-child(1) {
+  background-color: var(--color-gold-dec);
+  animation-delay: 0ms;
+}
+.thinkingPulse span:nth-child(2) {
+  background-color: var(--color-green-dec);
+  animation-delay: 180ms;
+}
+.thinkingPulse span:nth-child(3) {
+  background-color: var(--color-teal-dec);
+  animation-delay: 360ms;
+}
+
+.thinkingLabel {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-600);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: var(--layer-ambient);
+    transform: scale(0.82);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thinkingPulse span {
+    animation: none;
+    opacity: var(--layer-active);
+  }
+}

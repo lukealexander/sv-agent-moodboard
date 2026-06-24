@@ -1,0 +1,198 @@
+/* Full-screen drenched convergence. z-index sits above page content, below modals (50). */
+.stage {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  padding: var(--space-6);
+  text-align: center;
+  color: var(--color-dark-text);
+  background:
+    radial-gradient(circle at 50% 40%, #3a1c5c 0%, var(--color-depth) 58%, #190a26 100%);
+}
+
+.field {
+  position: relative;
+  width: 320px;
+  height: 300px;
+  flex-shrink: 0;
+}
+
+.orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-pill);
+  background: radial-gradient(circle at 50% 50%, var(--facet), transparent 68%);
+  /* resting composed emblem — also the reduced-motion state */
+  transform: translate(calc(-50% + var(--tx) * 0.62), calc(-50% + var(--ty) * 0.62)) scale(0.95);
+  opacity: 0.85;
+  filter: blur(1px);
+  will-change: transform, opacity;
+}
+
+.spark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-spark);
+  box-shadow:
+    0 0 26px 6px rgba(255, 255, 0, 0.55),
+    0 0 64px 22px rgba(255, 255, 0, 0.22);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 30rem;
+}
+
+.captionTitle {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+  letter-spacing: var(--letter-spacing-h2);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-dark-text);
+  text-wrap: balance;
+}
+
+.captionSub {
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  color: var(--color-dark-text-secondary);
+  max-width: 44ch;
+  text-wrap: pretty;
+}
+
+.pills {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: var(--space-1) 0;
+  padding: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-dark-text);
+  background-color: var(--color-dark-surface-2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-pill);
+}
+
+.pillDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--facet);
+  box-shadow: 0 0 8px 1px color-mix(in oklab, var(--facet) 60%, transparent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.primary {
+  color: var(--color-depth);
+  background-color: var(--color-teal-on-dark);
+}
+
+.primary:hover {
+  box-shadow: 0 0 0 4px rgba(47, 182, 212, 0.2);
+}
+
+.primary:active {
+  transform: translateY(1px);
+}
+
+.ghost {
+  color: var(--color-dark-text-secondary);
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ghost:hover {
+  color: var(--color-dark-text);
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Motion only for users who allow it. Default (and reduced) state is the resting emblem. */
+@media (prefers-reduced-motion: no-preference) {
+  .stage {
+    animation: stageIn 460ms var(--ease-calm) both;
+  }
+
+  .stage[data-status="generating"] .orb {
+    animation: converge 2200ms var(--ease-calm) infinite;
+    animation-delay: var(--delay);
+  }
+
+  .stage[data-status="generating"] .spark {
+    animation: sparkPulse 1100ms var(--ease-calm) infinite;
+  }
+}
+
+@keyframes stageIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes converge {
+  0% {
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(1);
+    opacity: 0.9;
+  }
+  68% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.22);
+    opacity: 0;
+  }
+}
+
+@keyframes sparkPulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(0.82);
+    box-shadow:
+      0 0 20px 4px rgba(255, 255, 0, 0.4),
+      0 0 48px 14px rgba(255, 255, 0, 0.16);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.12);
+    box-shadow:
+      0 0 30px 8px rgba(255, 255, 0, 0.65),
+      0 0 74px 26px rgba(255, 255, 0, 0.28);
+  }
+}
+
+@media (max-width: 560px) {
+  .field {
+    transform: scale(0.78);
+  }
+}

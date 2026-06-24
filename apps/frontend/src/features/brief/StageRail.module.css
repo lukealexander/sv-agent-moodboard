@@ -1,0 +1,190 @@
+.rail {
+  width: 100%;
+}
+
+.heading {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-600);
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  position: relative;
+}
+
+/* connector line between nodes */
+.item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  height: calc(100% - 22px + var(--space-5));
+  width: 1.5px;
+  background-color: var(--color-neutral-200);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  width: 100%;
+  text-align: left;
+  background-color: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2);
+  margin-left: calc(-1 * var(--space-2));
+  min-height: auto;
+}
+
+button.row {
+  cursor: pointer;
+}
+
+button.row:hover {
+  background-color: var(--color-neutral-100);
+}
+
+.node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-neutral-200);
+  background-color: var(--color-canvas);
+  color: var(--color-dark-text);
+  z-index: 1;
+}
+
+.item[data-status="done"] .node {
+  background-color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.item[data-status="current"] .node {
+  background-color: var(--color-teal);
+  border-color: var(--color-teal);
+  box-shadow: 0 0 0 4px var(--color-info-surface);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-400);
+}
+
+.item[data-status="done"] .title,
+.item[data-status="current"] .title {
+  color: var(--color-ink);
+}
+
+.forkTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal);
+}
+
+.pencil {
+  color: var(--color-neutral-400);
+  opacity: 0;
+  margin-left: auto;
+  transition: opacity var(--duration-fast) var(--ease-calm);
+}
+
+button.row:hover .pencil {
+  opacity: 1;
+}
+
+.skipped {
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-400);
+}
+
+.summaries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+  color: var(--color-neutral-600);
+}
+
+.branchTag {
+  flex-shrink: 0;
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-teal);
+}
+
+/* ---- Mobile: collapse to a horizontal dot stepper, labelling only the current stage ---- */
+@media (max-width: 880px) {
+  .heading {
+    margin-bottom: var(--space-3);
+  }
+  .list {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-3);
+  }
+  .item {
+    flex-shrink: 0;
+  }
+  /* no connector lines on the compact stepper */
+  .item:not(:last-child)::before {
+    display: none;
+  }
+  .row {
+    grid-template-columns: auto auto;
+    align-items: center;
+    gap: var(--space-2);
+    white-space: nowrap;
+    margin-left: 0;
+    padding: var(--space-1);
+  }
+  /* label only the current stage; the rest are dots */
+  .title {
+    display: none;
+  }
+  .item[data-status="current"] .title {
+    display: inline-flex;
+  }
+  .summaries,
+  .skipped,
+  .forkTag,
+  .pencil {
+    display: none;
+  }
+}

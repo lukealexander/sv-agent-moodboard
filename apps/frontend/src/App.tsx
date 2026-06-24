@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { AuthProvider } from "./auth/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Brief } from "./pages/Brief";
 import { Callback } from "./pages/Callback";
 import { Home } from "./pages/Home";
 import { Login } from "./pages/Login";
@@ -20,6 +21,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/brief"
+              element={
+                <ProtectedRoute>
+                  <Brief />
                 </ProtectedRoute>
               }
             />

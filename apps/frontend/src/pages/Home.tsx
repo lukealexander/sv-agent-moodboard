@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "../auth/AuthContext";
 import { API_BASE, fetchWithAuth } from "../api/client";
@@ -258,6 +259,19 @@ export function Home() {
       </header>
 
       <main className={styles.main}>
+        <section className={styles.lead}>
+          <div className={styles.leadText}>
+            <h2 className={styles.leadTitle}>Create a moodboard</h2>
+            <p className={styles.leadCopy}>
+              Answer a few questions and the studio composes a visual direction — or
+              several to compare.
+            </p>
+          </div>
+          <Link to="/brief" className={styles.leadCta}>
+            Start a brief
+          </Link>
+        </section>
+
         <section className={styles.card}>
           <h2 className={styles.cardTitle}>System status</h2>
           <p className={styles.hint}>Select a check for details.</p>

@@ -47,6 +47,57 @@
   gap: var(--space-5);
 }
 
+/* ---- Lead call to action ---- */
+.lead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-e1);
+}
+
+.leadText {
+  min-width: 0;
+}
+
+.leadTitle {
+  font-size: var(--font-size-h3);
+  letter-spacing: var(--letter-spacing-h3);
+}
+
+.leadCopy {
+  margin-top: var(--space-1);
+  font-size: var(--font-size-small);
+  color: var(--color-neutral-600);
+  max-width: 48ch;
+}
+
+.leadCta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-dark-text);
+  background-color: var(--color-ink);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition:
+    background-color var(--duration-fast) var(--ease-calm),
+    box-shadow var(--duration-fast) var(--ease-calm);
+}
+
+.leadCta:hover {
+  background-color: var(--color-depth);
+  box-shadow: var(--shadow-e1);
+}
+
 .card {
   background-color: var(--color-canvas);
   border: 1px solid var(--color-neutral-200);
@@ -295,6 +346,29 @@
 @media (prefers-color-scheme: dark) {
   .header {
     border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .lead {
+    background-color: var(--color-dark-surface-1);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .leadTitle {
+    color: var(--color-dark-text);
+  }
+
+  .leadCopy {
+    color: var(--color-dark-text-secondary);
+  }
+
+  .leadCta {
+    background-color: var(--color-teal-on-dark);
+    color: var(--color-depth);
+  }
+
+  .leadCta:hover {
+    background-color: var(--color-teal);
+    color: var(--color-dark-text);
   }
 
   .subtitle {

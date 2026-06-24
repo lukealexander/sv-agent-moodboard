@@ -1,0 +1,9 @@
+.page {
+  min-height: 100vh;
+  /* Explicit light studio — overrides the app's system dark-mode body so the
+     questioning surface stays bright; the reveal supplies the dark. */
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(143, 217, 115, 0.05), transparent 60%),
+    linear-gradient(180deg, #fbfafd 0%, #f4f1f8 100%);
+  background-attachment: fixed;
+}

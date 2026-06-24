@@ -19,6 +19,7 @@ apps/api/.venv-test
 # Node
 node_modules/
 apps/frontend/dist/
+*.tsbuildinfo
 
 # Playwright
 apps/frontend/test-results/
