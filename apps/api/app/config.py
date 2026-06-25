@@ -30,6 +30,25 @@ class Settings(BaseSettings):
     # Optional — name of the Secrets Manager secret holding runtime secrets
     aws_secrets_manager_secret_name: str = ""
 
+    # ---- Moodboard agent: LLM (Anthropic) ----
+    # When unset, the briefing/concept agent falls back to a deterministic local
+    # stub so the service runs end-to-end with no credentials (mirrors LOCAL_DEV).
+    anthropic_api_key: str = ""
+    anthropic_model: str = "claude-opus-4-8"
+
+    # ---- Moodboard renderer: image generation (Replicate) ----
+    # When unset, image generation falls back to a deterministic SVG stub.
+    replicate_api_token: str = ""
+    replicate_model: str = "black-forest-labs/flux-dev"
+
+    # ---- Asset storage ----
+    # Local filesystem by default (dev); set s3_bucket to use S3 (prod). Generated
+    # moodboard HTML inlines its images as data URIs, so the file is self-contained
+    # regardless of backend; stored assets back the structured API response.
+    storage_dir: str = "/tmp/moodboard-assets"
+    s3_bucket: str = ""
+    s3_prefix: str = "moodboards"
+
     # CORS — required when local_dev=False; comma-separated list of allowed origins
     cors_allowed_origins: str = ""
 
@@ -62,6 +81,20 @@ class Settings(BaseSettings):
     @property
     def cognito_allowed_client_id_list(self) -> list[str]:
         return [c.strip() for c in self.cognito_allowed_client_ids.split(",") if c.strip()]
+
+    @property
+    def llm_stubbed(self) -> bool:
+        """True when no Anthropic key is configured — use the deterministic stub."""
+        return not self.anthropic_api_key
+
+    @property
+    def images_stubbed(self) -> bool:
+        """True when no Replicate token is configured — use the deterministic stub."""
+        return not self.replicate_api_token
+
+    @property
+    def storage_uses_s3(self) -> bool:
+        return bool(self.s3_bucket)
 
 
 settings = Settings()

@@ -5,6 +5,8 @@ Every model must be imported here so that ``import app.models`` registers it on
 so a model that isn't re-exported here will be invisible to migrations.
 """
 
+from app.models.brief import BriefSession
 from app.models.item import Item
+from app.models.moodboard import GenerationRequest, Moodboard
 
-__all__ = ["Item"]
+__all__ = ["Item", "BriefSession", "GenerationRequest", "Moodboard"]

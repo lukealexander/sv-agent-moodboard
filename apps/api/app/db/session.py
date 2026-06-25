@@ -1,4 +1,5 @@
 from collections.abc import AsyncGenerator
+from contextlib import asynccontextmanager
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -21,6 +22,15 @@ def _get_engine():
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    _, factory = _get_engine()
+    async with factory() as session:
+        yield session
+
+
+@asynccontextmanager
+async def session_scope() -> AsyncGenerator[AsyncSession, None]:
+    """A standalone session for code outside the request cycle (the async generation
+    worker, SSE pollers) where the FastAPI ``get_db`` dependency isn't available."""
     _, factory = _get_engine()
     async with factory() as session:
         yield session

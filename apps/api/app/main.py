@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.routers import health, items, me
+from app.routers import briefs, health, items, me, moodboards
 
 app = FastAPI(
     title="agent-moodboard API",
@@ -23,3 +23,5 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(me.router)
 app.include_router(items.router)
+app.include_router(briefs.router)
+app.include_router(moodboards.router)

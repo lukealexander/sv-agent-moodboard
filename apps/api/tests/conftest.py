@@ -130,3 +130,31 @@ def cognito(
 def auth_header(token: str) -> dict[str, str]:
     """Convenience: build an Authorization header from a bare token."""
     return {"Authorization": f"Bearer {token}"}
+
+
+@pytest.fixture
+def db(tmp_path, monkeypatch: pytest.MonkeyPatch):
+    """A throwaway SQLite database wired into the app's session factory.
+
+    Points ``settings.database_url`` at a tmp file, resets the lazily-built engine
+    globals so they rebuild against it, and creates the schema. Both request handlers
+    (via ``get_db``) and the background generation worker (via ``session_scope``) share
+    this one database, so end-to-end generation can be exercised without Postgres.
+    """
+    import app.models  # noqa: F401 — register every model on Base.metadata
+    import app.db.session as session_module
+    from sqlalchemy import create_engine
+
+    from app.db.base import Base
+
+    db_file = tmp_path / "api_test.db"
+    url = f"sqlite+aiosqlite:///{db_file}"
+    monkeypatch.setattr(app_settings, "database_url", url)
+    monkeypatch.setattr(session_module, "_engine", None)
+    monkeypatch.setattr(session_module, "_session_factory", None)
+
+    sync_engine = create_engine(f"sqlite:///{db_file}")
+    Base.metadata.create_all(sync_engine)
+    sync_engine.dispose()
+
+    return url

@@ -135,6 +135,65 @@ on failure.
 The `/items` and `/whoami` handlers return stub data — replace them with real queries
 using `get_db`.
 
+## Moodboard API
+
+The API's real purpose: an **agentic moodboard service** that other AIs and products
+call. Two capabilities, each usable entirely on its own.
+
+### A. Briefing (`/briefs`) — agentic, multi-step
+
+Walks a caller through building a moodboard brief: a fixed backbone of stages
+(`work → feeling → references → palette → audience`) with one optional agent-inserted
+follow-up per stage, and inline "forks" (alternatives) that resolve into divergent
+**directions**. Server-authoritative, so the SPA and external clients share one flow.
+
+| Method & path | Returns |
+|---|---|
+| `POST /briefs` | Create a session → `{id, status, next_question, content}` |
+| `POST /briefs/{id}/answer` | Record the current answer (`value` / `options` (fork) / `skip`); returns the next question, an adaptive follow-up, or `next_question: null` when done |
+| `POST /briefs/{id}/directions` | Curate divergent directions from the forks; session → `ready` |
+| `GET /briefs/{id}` | Full persisted state |
+
+### B. Generation (`/moodboards`) — async, image + HTML
+
+Composes a concept + image prompts (LLM), renders tiles (image provider), and assembles
+a **self-contained HTML file** (images inlined as data URIs). Accepts **either** a saved
+`brief_id` **or** an inline `brief` payload — so a client can generate without ever
+briefing. One request fans out to one moodboard per direction.
+
+| Method & path | Returns |
+|---|---|
+| `POST /moodboards` | Start generation (`{brief_id}` or `{brief}` + optional `directions`) → `202` `{id, status, moodboards:[…]}` |
+| `GET /moodboards/requests/{id}` | Request status + per-moodboard status |
+| `GET /moodboards/requests/{id}/events` | **SSE** stream of progress, closing on a terminal status |
+| `GET /moodboards/{id}` | One moodboard (concept, palette, image URLs, `html_url`) |
+| `GET /moodboards/{id}/html` | The shareable self-contained HTML (auth-gated) |
+| `GET /moodboards/{id}/image/{n}` | A rendered tile (local storage backend) |
+
+Generation runs as a FastAPI **background task**; clients watch progress over **SSE**
+(`status → done`). All routes are protected and scoped to the caller's `sub`
+(cross-service tokens work).
+
+### Providers (pluggable, with local stubs)
+
+| Concern | Real | Stub (when unset) | Config |
+|---|---|---|---|
+| LLM (follow-ups, concept + prompts) | Anthropic / Claude `claude-opus-4-8` | deterministic | `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL` |
+| Image rendering | Replicate (`black-forest-labs/flux-dev`) | deterministic SVG | `REPLICATE_API_TOKEN`, `REPLICATE_MODEL` |
+| Asset storage | S3 | local filesystem | `S3_BUCKET`, `S3_PREFIX`, `STORAGE_DIR` |
+
+Each real provider is **lazy-imported** inside its adapter, so the app imports and the
+test suite runs with none of these installed/configured — the stubs make the whole
+pipeline hermetic (the same philosophy as `LOCAL_DEV`). See `.env.example`.
+
+### Persistence
+
+`brief_sessions`, `generation_requests`, and `moodboards` (migration `0002`). Requests
+and moodboards persist so a slow/failed async run can be streamed and the result
+revisited later. **Known limitations** (see [TODO.md](../TODO.md)): the worker is
+in-process (lost on restart; single-instance SSE), and the HTML share route is auth-gated
+pending a shared cross-service "store & share" workflow.
+
 ## Database layer
 
 The DB layer is present but **dormant** by default — the API runs without a

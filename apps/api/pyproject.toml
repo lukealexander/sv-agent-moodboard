@@ -16,10 +16,15 @@ dependencies = [
     "asyncpg>=0.29",
     "alembic>=1.13",
     "psycopg2-binary>=2.9",
-    # boto3 is used only by app/dbtask.py (the one-shot DB bootstrap task) to read
-    # the RDS master secret and write the service's DATABASE_URL secret. The
-    # running API never imports it.
+    # boto3 is used by app/dbtask.py (the one-shot DB bootstrap task) to read the
+    # RDS master secret and write the service's DATABASE_URL secret, and by the
+    # S3 asset-storage backend when s3_bucket is configured.
     "boto3>=1.34",
+    # Moodboard agent + renderer. Both are lazy-imported inside their provider
+    # adapters, so the app stays importable (and the test suite hermetic) without
+    # credentials — the deterministic stubs run instead.
+    "anthropic>=0.49",
+    "replicate>=1.0",
 ]
 
 [project.optional-dependencies]
